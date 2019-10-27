@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Winapi.ActiveX, Winapi.ShellAPI, HGM.Controls.VirtualTable, Vcl.Grids,
   Vcl.ExtCtrls, HGM.Controls.Labels, Vcl.Imaging.pngimage, Vcl.StdCtrls,
-  HGM.Button, System.ImageList, Vcl.ImgList, System.Win.Registry;
+  HGM.Button, System.ImageList, Vcl.ImgList, System.Win.Registry,
+  System.Generics.Collections;
 
 type
   TFile = record
@@ -35,7 +36,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     PanelHintNoSupport: TPanel;
-    Label4: TLabel;
+    LabelInfo: TLabel;
     Image2: TImage;
     ButtonFlatCloseHint2: TButtonFlat;
     Panel1: TPanel;
@@ -52,6 +53,11 @@ type
     Label6: TLabel;
     Image3: TImage;
     ButtonFlat1: TButtonFlat;
+    PanelSuccess: TPanel;
+    LabelSuccess: TLabel;
+    Image4: TImage;
+    ButtonFlatOk: TButtonFlat;
+    TimerAnimate: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBoxCurrentUserClick(Sender: TObject);
@@ -64,14 +70,20 @@ type
     procedure ButtonFlatAutorunListClick(Sender: TObject);
     procedure TableExAutorunsItemColClick(Sender: TObject; MouseButton: TMouseButton; const Index: Integer);
     procedure ButtonFlatInfoClick(Sender: TObject);
+    procedure ButtonFlatOkClick(Sender: TObject);
+    procedure ButtonFlat1Click(Sender: TObject);
+    procedure TimerAnimateTimer(Sender: TObject);
   private
     FFile: TFile;
     FAutoruns: TAutoruns;
+    FActionInfoBox: TProc;
+    FAnimateDir: Boolean;
     function CreateInputFile(FileName: string): TFile;
     procedure Clear;
     function ExistCurrentApp: Integer;
     procedure AddCurrentToAutoRun;
     procedure PanelSplash(Panel: TPanel);
+    procedure ShowInfo(Text: string; CloseAction: TProc = nil);
   public
     procedure ShowDragPanel;
     procedure HideDragPanel;
@@ -86,21 +98,37 @@ type
     function _Release: Integer; stdcall;
   end;
 
+const
+  BinExtArray: array of string = ['.exe', '.bat', '.cmd'];
+
 var
   FormMain: TFormMain;
-  CF_IDLIST: Integer = 0;
 
 implementation
 
 uses
-  HGM.Common.Utils, ComObj, Commctrl, ShlObj;
+  HGM.Common.Utils, ComObj, Commctrl, ShlObj, HGM.Common.Helper;
 
 {$R *.dfm}
 
-const
-  IID_IImageList: TGUID = '{46EB5926-582E-4017-9FDF-E8998DAA0950}';
+function RunAsAdmin(Window: HWND; FileName: string; Parameters: string): Boolean;
+var
+  ShellExeInfo: TShellExecuteInfo;
+begin
+  ZeroMemory(@ShellExeInfo, SizeOf(ShellExeInfo));
+  ShellExeInfo.cbSize := SizeOf(TShellExecuteInfo);
+  ShellExeInfo.Wnd := Window;
+  ShellExeInfo.fMask := SEE_MASK_FLAG_DDEWAIT or SEE_MASK_FLAG_NO_UI;
+  ShellExeInfo.lpVerb := PChar('runas');
+  ShellExeInfo.lpFile := PChar(FileName);
+  ShellExeInfo.lpParameters := PChar(Parameters);
+  ShellExeInfo.nShow := SW_SHOWNORMAL;
+  Result := ShellExecuteEx(@ShellExeInfo);
+end;
 
 function GetImageListSH(SHIL_FLAG: Cardinal): HIMAGELIST;
+const
+  IID_IImageList: TGUID = '{46EB5926-582E-4017-9FDF-E8998DAA0950}';
 type
   _SHGetImageList = function(iImageList: integer; const riid: TGUID; var ppv: Pointer): hResult; stdcall;
 var
@@ -173,7 +201,6 @@ var
   FileName: string;
   FileList: TStringList;
 begin
-  HideDragPanel;
   //Структура дропа файлов
   FmtEtc.cfFormat := CF_HDROP;
   FmtEtc.ptd := nil;
@@ -185,48 +212,43 @@ begin
   begin
     FileList := TStringList.Create;
     try
-      try
-        for i := 0 to DragQueryFile(Medium.hGlobal, $FFFFFFFF, nil, 0) - 1 do
+      for i := 0 to DragQueryFile(Medium.hGlobal, $FFFFFFFF, nil, 0) - 1 do
+      begin
+        FileNameLength := DragQueryFile(Medium.hGlobal, i, nil, 0);
+        SetLength(FileName, FileNameLength);
+        DragQueryFile(Medium.hGlobal, i, PChar(FileName), FileNameLength + 1);
+        //Только исполнительные файлы
+
+        if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+          FileList.Add(FileName)
+        else if AnsiLowerCase(ExtractFileExt(FileName)) = '.lnk' then
         begin
-          FileNameLength := DragQueryFile(Medium.hGlobal, i, nil, 0);
-          SetLength(FileName, FileNameLength);
-          DragQueryFile(Medium.hGlobal, i, PChar(FileName), FileNameLength + 1);
-          //Только EXE-файлы
-          if AnsiLowerCase(ExtractFileExt(FileName)) = '.exe' then
-            FileList.Add(FileName)
-          else if AnsiLowerCase(ExtractFileExt(FileName)) = '.lnk' then
-          begin
-            FileName := GetFileNameFromLink(FileName);
-            if AnsiLowerCase(ExtractFileExt(FileName)) = '.exe' then
-              FileList.Add(FileName);
-          end;
+          FileName := GetFileNameFromLink(FileName);
+          if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+            FileList.Add(FileName);
         end;
-      finally
-        DragFinish(Medium.hGlobal);
       end;
-    finally
-      ReleaseStgMedium(Medium);
-    end;
-    try
       if FileList.Count > 0 then
         ProcessFile(FileList[0])
       else
         ProcessFile('');
     finally
+      DragFinish(Medium.hGlobal);
+      ReleaseStgMedium(Medium);
       FileList.Free;
     end;
     Result := S_OK;
   end
   else
     Result := S_FALSE;
+  HideDragPanel;
 end;
 
 procedure TFormMain.FormCreate(Sender: TObject);
-var FileName: string;
+var
+  FileName: string;
 begin
-  OleInitialize(nil);
   FAutoruns := TAutoruns.Create(TableExAutoruns);
-  CF_IDLIST := RegisterClipboardFormat(CFSTR_SHELLIDLIST);
   RegisterDragDrop(Handle, Self);
   PanelSplash(PanelStart);
   if ParamCount > 0 then
@@ -234,12 +256,12 @@ begin
     FileName := ParamStr(1);
     if FileExists(FileName) then
     begin
-      if AnsiLowerCase(ExtractFileExt(FileName)) = '.exe' then
+      if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
         ProcessFile(FileName)
       else if AnsiLowerCase(ExtractFileExt(FileName)) = '.lnk' then
       begin
         FileName := GetFileNameFromLink(FileName);
-        if AnsiLowerCase(ExtractFileExt(FileName)) = '.exe' then
+        if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
           ProcessFile(FileName);
       end;
     end;
@@ -248,12 +270,13 @@ end;
 
 procedure TFormMain.FormDestroy(Sender: TObject);
 begin
-  FAutoruns.Clear;
+  RevokeDragDrop(Handle);
   FAutoruns.Free;
 end;
 
 procedure TFormMain.HideDragPanel;
 begin
+  TimerAnimate.Enabled := False;
   PanelDrag.Hide;
 end;
 
@@ -314,13 +337,28 @@ var
 begin
   Reg := TRegistry.Create(KEY_WRITE);
   try
-    if CheckBoxLocalMachine.Checked then
-      Reg.RootKey := HKEY_LOCAL_MACHINE
-    else
-      Reg.RootKey := HKEY_CURRENT_USER;
-    Reg.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', True);
-    Reg.WriteString(FFile.Name, FFile.FullName);
-    MessageBox(Handle, 'Приложение успешно добавлено в автозагрузку', '', MB_ICONINFORMATION or MB_OK);
+    try
+      if CheckBoxLocalMachine.Checked then
+        Reg.RootKey := HKEY_LOCAL_MACHINE
+      else
+        Reg.RootKey := HKEY_CURRENT_USER;
+      Reg.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', True);
+      Reg.WriteString(FFile.Name, FFile.FullName);
+      LabelSuccess.Caption := 'Приложение успешно добавлено в автозагрузку';
+      PanelSplash(PanelSuccess);
+    except
+      on E: Exception do
+      begin
+        if E is ERegistryException then
+        begin
+          ShowInfo('Приложение не было добавлено в автозапуск, т.к. у пользователя нет прав. Запустите приложение от имени администратора');
+        end
+        else
+        begin
+          ShowInfo('Произошла неизвестная ошибка и приложение не было добавлено в автозапуск. Попробуйте запустить приложение от имени администратора');
+        end;
+      end;
+    end;
   finally
     Reg.Free;
   end;
@@ -338,7 +376,13 @@ end;
 
 procedure TFormMain.ButtonFlatCloseHint2Click(Sender: TObject);
 begin
-  Clear;
+  if Assigned(FActionInfoBox) then
+  begin
+    FActionInfoBox();
+    FActionInfoBox := nil;
+  end
+  else
+    PanelHintNoSupport.Hide;
 end;
 
 procedure TFormMain.ButtonFlatInfoClick(Sender: TObject);
@@ -346,17 +390,34 @@ begin
   PanelSplash(PanelInfo);
 end;
 
+procedure TFormMain.ButtonFlatOkClick(Sender: TObject);
+begin
+  PanelSuccess.Hide;
+end;
+
+procedure TFormMain.ShowInfo(Text: string; CloseAction: TProc);
+begin
+  FActionInfoBox := CloseAction;
+  LabelInfo.Caption := Text;
+  PanelSplash(PanelHintNoSupport);
+end;
+
+procedure TFormMain.ButtonFlat1Click(Sender: TObject);
+begin
+  PanelInfo.Hide;
+end;
+
 procedure TFormMain.ButtonFlatAddClick(Sender: TObject);
 begin
   case ExistCurrentApp of
     -1:
-      MessageBox(Handle, 'Нет доступа к реестру', 'Ошибка', MB_ICONERROR or MB_OK);
+      ShowInfo('Нет доступа к реестру');
     0:
       AddCurrentToAutoRun;
     1:
-      MessageBox(Handle, 'Приложение уже добавлено в автозагрузку с текущим пользователем', '', MB_ICONWARNING or MB_OK);
+      ShowInfo('Приложение уже добавлено в автозагрузку с текущим пользователем');
     2:
-      MessageBox(Handle, 'Приложение уже добавлено в автозагрузку с любым пользователем', '', MB_ICONWARNING or MB_OK);
+      ShowInfo('Приложение уже добавлено в автозагрузку с любым пользователем');
   end;
 end;
 
@@ -438,14 +499,12 @@ procedure TFormMain.ProcessFile(FileName: string);
 var
   Icon: TIcon;
 begin
-  Clear;
   if FileName = '' then
   begin
-    PanelSplash(PanelHintNoSupport);
+    ShowInfo('Выбранный вами файл не является исполнительным и не может быть добавлен в Автозагрузку. ' + #13#10 + 'Возможно, это ссылка-протокол, которая используется сторонними программами.', Clear);
     Exit;
   end;
   FFile := CreateInputFile(FileName);
-  FAutoruns.Add(FFile);
   LabelName.Caption := FFile.Name;
   LabelFullName.Caption := FFile.FullName;
   Icon := TIcon.Create;
@@ -460,6 +519,7 @@ end;
 
 procedure TFormMain.ShowDragPanel;
 begin
+  TimerAnimate.Enabled := True;
   PanelSplash(PanelDrag);
 end;
 
@@ -518,6 +578,27 @@ begin
   finally
     Reg.Free;
   end;
+end;
+
+procedure TFormMain.TimerAnimateTimer(Sender: TObject);
+begin
+  if FAnimateDir then
+  begin //вниз
+    ImageDrop.Top := ImageDrop.Top + 7;
+    if ImageDrop.BoundsRect.Bottom >= LabelExDrag.BoundsRect.Bottom then
+    begin
+      FAnimateDir := False;
+    end;
+  end
+  else //вверх
+  begin
+    ImageDrop.Top := ImageDrop.Top - 4;
+    if ImageDrop.BoundsRect.Top <= LabelExDrag.BoundsRect.Top then
+    begin
+      FAnimateDir := True;
+    end;
+  end;
+  PanelDrag.Repaint;
 end;
 
 function TFormMain._AddRef: Integer;

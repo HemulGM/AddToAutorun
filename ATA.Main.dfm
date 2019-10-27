@@ -4,7 +4,7 @@ object FormMain: TFormMain
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1040#1074#1090#1086#1079#1072#1087#1091#1089#1082' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1103
-  ClientHeight = 272
+  ClientHeight = 274
   ClientWidth = 411
   Color = 15132390
   DoubleBuffered = True
@@ -20,322 +20,270 @@ object FormMain: TFormMain
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 19
-  object PanelDrag: TPanel
+  object PanelClient: TPanel
     Left = 0
     Top = 0
     Width = 411
-    Height = 272
+    Height = 274
     Margins.Left = 15
     Margins.Top = 15
     Margins.Right = 15
     Margins.Bottom = 15
     Align = alClient
     BevelOuter = bvNone
-    Caption = 'DragFiles'
     Color = 15132390
     ParentBackground = False
-    TabOrder = 0
-    Visible = False
-    object LabelExDrag: TLabelEx
-      AlignWithMargins = True
-      Left = 20
-      Top = 20
-      Width = 371
-      Height = 232
-      Margins.Left = 20
-      Margins.Top = 20
-      Margins.Right = 20
-      Margins.Bottom = 20
-      Align = alClient
-      Brush.Color = 15132390
-      Pen.Color = 9079434
-      Pen.Mode = pmMergePenNot
-      Pen.Style = psDash
-      Pen.Width = 3
-      Caption = ''
+    TabOrder = 1
+    object ImageIcon: TImage
+      Left = 13
+      Top = 13
+      Width = 48
+      Height = 48
+      Center = True
+    end
+    object LabelName: TLabel
+      Left = 67
+      Top = 15
+      Width = 330
+      Height = 24
+      AutoSize = False
+      Caption = 'LabelName'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 4802889
-      Font.Height = -20
+      Font.Color = 3355443
+      Font.Height = -19
       Font.Name = 'Tahoma'
       Font.Style = []
-      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter, tfWordBreak, tfWordEllipsis]
-      IgnorBounds = True
-      EllipseRectVertical = False
-      ExplicitLeft = 85
-      ExplicitTop = 42
-      ExplicitWidth = 1018
-      ExplicitHeight = 550
+      ParentFont = False
     end
-    object ImageDrop: TImage
-      AlignWithMargins = True
-      Left = 50
-      Top = 50
-      Width = 311
-      Height = 172
-      Margins.Left = 50
-      Margins.Top = 50
-      Margins.Right = 50
-      Margins.Bottom = 50
-      Align = alClient
-      Center = True
-      Picture.Data = {
-        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000800000
-        00800806000000C33E61CB000000097048597300000EC400000EC401952B0E1B
-        0000037C4944415478DAEDDCBD6E535B1445611C454272431A5E828212DECA55
-        245B883AA48BE44740F4D0F23E94D4965C44C65E28124489E39F35F73CFBACF1
-        35DCCA9EDB6B08BA3B7985D226EE01F02280E208A03802288E008A2380E208A0
-        3802288E008A2380E208A03802288E008A2380E208A03802288E008A2380E208
-        A03802288E008A2380E2BA09E0E6E6E6DDC5C5C57BF78E634CA7D3EFB3D96CED
-        DEB14F3701DCDEDE2EB67F7C71EF38C6E5E5E5DBEBEBEBDFEE1DFB1080100124
-        22000D021022804404A041004204908800340840880012118006010811402202
-        D0200021024844001A042044008908408300840820110168108010012422000D
-        021022804404A041004204908800340840880012118006010811402202D02000
-        21024844001A042044008908408300840820110168108010012422000D021022
-        804404A0410042049088003408408800121180466A00CBE5F2F56AB5FABAD96C
-        3EA60F9D4CDE6CFFB86AF6CBE4F8B5FD2DEE05BFC5E7C562F12DE5B3B2C7DDDD
-        DD5DADD7EB9FDBFFFC90FDD988E37F9ACFE7697F134AFE0920028DECE3C767AA
-        C612412EC5F1E37395A3892087EAF8F1D9EAF144701EE5F1E3F35B3C82084EA3
-        3E7E7C47ABC710C1715A1C3FBEA7E5A388E030AD8E1FDFD5FA7144B05FCBE3C7
-        F7391E49044F6B7DFCF84ED76389E07F8EE3C7F73A1F4D047FB98E1FDFED7E7C
-        F5089CC78FEF77FF003B5523701F3F36B87F8407D52218C2F163877BC0BFAA44
-        3094E3C716F780C7C61EC1908E1F7BDC039E32D6088676FCD8E41EF09CB14530
-        C4E3C72EF7807DC612C1508F1FDBDC035ED27B04433E7EEC730F3844AF110CFD
-        F8B1D13DE050BD45D0C3F163A77BC0317A89A097E3C756F780630D3D829E8E1F
-        7BDD034E31D4087A3B7E6C760F38D5D022E8F1F8B1DB3DE01C4389A0D7E3C776
-        F78073B923E8F9F8B1DF3D20832B82DE8F1F6F700FC8D23A82311C3FDEE11E90
-        A9550463397EBCC53D209B3A82311D3FDEE31EA0A08A606CC78F37B907A86447
-        30C6E3C7BBDC0394B22218EBF1E36DEE016AE74630E6E3C7FBDC035A383582B1
-        1F3FDEE81ED0CAB11154387EBCD33DA0A54323A872FC78AB7B406B2F4550E9F8
-        F15EF70087E722A876FC78B37B80CBE3082A1E3FDEED1EE0F410C1F6F83F2A1E
-        7FA774003BBBFFC1F56C365BBB77B8940FA03A02288E008A2380E208A0380228
-        8E008A2380E208A03802288E008A2380E208A03802288E008A2380E208A0B83F
-        F1EB469F535ED0D90000000049454E44AE426082}
-      ExplicitLeft = 58
-      ExplicitTop = 144
-      ExplicitWidth = 386
-      ExplicitHeight = 161
-    end
-  end
-  object PanelAutorun: TPanel
-    Left = 0
-    Top = 0
-    Width = 411
-    Height = 272
-    Align = alClient
-    BevelOuter = bvNone
-    Color = 15132390
-    ParentBackground = False
-    TabOrder = 4
-    Visible = False
-    object ButtonFlatCloseAutoruns: TButtonFlat
-      Left = 0
-      Top = 223
-      Width = 411
-      Height = 49
-      Align = alBottom
-      Caption = #1047#1072#1082#1088#1099#1090#1100
-      ColorNormal = clGray
-      ColorOver = 9671571
-      ColorPressed = 7566195
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWhite
-      FontOver.Height = -15
-      FontOver.Name = 'Segoe UI'
-      FontOver.Style = [fsBold]
-      FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWhite
-      FontDown.Height = -15
-      FontDown.Name = 'Segoe UI'
-      FontDown.Style = [fsBold]
-      IgnorBounds = True
-      OnClick = ButtonFlatCloseAutorunsClick
-      RoundRectParam = 0
-      ShowFocusRect = False
-      TabOrder = 0
-      TabStop = True
-      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clWhite
-      SubTextFont.Height = -13
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-    end
-    object TableExAutoruns: TTableEx
-      Left = 0
-      Top = 0
-      Width = 411
-      Height = 223
-      Align = alClient
-      BorderStyle = bsNone
-      DefaultRowHeight = 45
-      TabOrder = 1
-      OnDrawCellData = TableExAutorunsDrawCellData
-      ItemIndex = -1
-      OnItemColClick = TableExAutorunsItemColClick
-      Columns = <
-        item
-          Width = 360
-          MinWidth = 360
-        end
-        item
-          Width = 51
-          MinWidth = 30
-          AsButton = True
-        end>
-      DefaultDataDrawing = False
-      ItemCount = 1
-      LineColorXor = 15593455
-      LineHotColor = 16316664
-      LineSelColor = 14803939
-      FontHotLine.Charset = DEFAULT_CHARSET
-      FontHotLine.Color = 2631720
-      FontHotLine.Height = -16
-      FontHotLine.Name = 'Tahoma'
-      FontHotLine.Style = []
-      FontLine.Charset = DEFAULT_CHARSET
-      FontLine.Color = 2631720
-      FontLine.Height = -16
-      FontLine.Name = 'Tahoma'
-      FontLine.Style = []
-      FontSelLine.Charset = DEFAULT_CHARSET
-      FontSelLine.Color = clWhite
-      FontSelLine.Height = -16
-      FontSelLine.Name = 'Tahoma'
-      FontSelLine.Style = []
-      ShowColumns = False
-      ColumnsFont.Charset = DEFAULT_CHARSET
-      ColumnsFont.Color = 2631720
-      ColumnsFont.Height = -11
-      ColumnsFont.Name = 'Tahoma'
-      ColumnsFont.Style = []
-      CanClickToUnfocused = True
-    end
-  end
-  object PanelHintNoSupport: TPanel
-    Left = 0
-    Top = 0
-    Width = 411
-    Height = 272
-    Align = alClient
-    BevelOuter = bvNone
-    Color = 15132390
-    ParentBackground = False
-    TabOrder = 3
-    Visible = False
-    object Label4: TLabel
-      AlignWithMargins = True
-      Left = 20
-      Top = 66
-      Width = 371
-      Height = 107
-      Margins.Left = 20
-      Margins.Top = 20
-      Margins.Right = 20
-      Margins.Bottom = 50
-      Align = alClient
-      Alignment = taCenter
+    object LabelFullName: TLabel
+      Left = 67
+      Top = 41
+      Width = 330
+      Height = 18
       AutoSize = False
-      Caption = 
-        #1042#1099#1073#1088#1072#1085#1085#1099#1081' '#1074#1072#1084#1080' '#1092#1072#1081#1083' '#1085#1077' '#1103#1074#1083#1103#1077#1090#1089#1103' '#1080#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1084' '#1080' '#1085#1077' '#1084#1086#1078#1077#1090' '#1073#1099#1090#1100' '#1076 +
-        #1086#1073#1072#1074#1083#1077#1085' '#1074' '#1040#1074#1090#1086#1079#1072#1075#1088#1091#1079#1082#1091'. '#1042#1086#1079#1084#1086#1078#1085#1086', '#1101#1090#1086' '#1089#1089#1099#1083#1082#1072'-'#1087#1088#1086#1090#1086#1082#1086#1083', '#1082#1086#1090#1086#1088#1072#1103' '#1080 +
-        #1089#1087#1086#1083#1100#1079#1091#1077#1090#1089#1103' '#1089#1090#1086#1088#1086#1085#1085#1080#1084#1080' '#1087#1088#1086#1075#1088#1072#1084#1084#1072#1084#1080'.'
+      Caption = 'LabelFullName'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
+      Font.Color = 5789784
+      Font.Height = -13
+      Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      Layout = tlCenter
-      WordWrap = True
-      ExplicitTop = 20
-      ExplicitWidth = 304
-      ExplicitHeight = 126
     end
-    object Image2: TImage
-      Left = 0
-      Top = 0
-      Width = 411
-      Height = 46
-      Align = alTop
-      Center = True
-      Picture.Data = {
-        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
-        00200806000000737A7AF4000000097048597300000EC400000EC401952B0E1B
-        000002874944415478DAED974D68134114C76736BB25B13D582C827AD2A36DA8
-        90BABB58F564A00441C986828262C143BD280A063C483D78500B7A537AF0A0A8
-        947CF4A0A878F2BA1F41726811B127454148442A1E02D99DFE37282D613F66F3
-        810A7DB0EC6466F8BFDF7B799937A1E42F1BDD02F8AF001652A96D3B24E93261
-        EC20A5F4C4E635C6D82F88DDB56DBB325DA93CEF29C0D36472389E48DC218270
-        9E4B95B1CF10CE670D63B16B80254539CC2875231A8E92ADDF202FBFD4EBDAC5
-        D5D546470025593E4905A188A118D9F9064465ADD148CF54AB3F220120F23422
-        7FD595F33F0C84585F6BB5235E99F004687DE78383CB18EEEED6F94622D8AD9C
-        615CE30228CBF27D14DC8510CD4682B19D19C358C3FE3CF6DF0ED9DF64B67D20
-        67592B8100CF52A991014972AB38DE6300370D8B9A619C0A0428AB6A1EAF70B1
-        4E0008F9491D676FD634EBBE00254529E190D1FA044098E34CE54CF38D27C00D
-        4284A4A27C2494EEEB17001C5EC9EAFA3D4F80C2E8E8406C68E81B00B6F72D03
-        6DBF867F0BE02D0E9DEF8AF20900BB38B49A509BC7D3C0FE493C691E00D8754D
-        D76F7A02B89F5184CB28C2FD9C62910D1938830C3CF1032025557D80C9D93E39
-        77044AC75084EF7D018AB27C5C1084171C7A9DD4C03B5BD7E569426C5F800221
-        B198AA56311CEB3980E3CC6AA6B9B079CAB3172C210B2C3C0BD18A90B19544BD
-        9ECAB47544DF765C569447103DCB91561E6B12DB3EA45996D5BEE00BE0DEFF46
-        44F135208E76E3B955788CCDE0FC7FECB51E78236A41485219C3A94E2347F339
-        0DE745BF0D3C97528A0E3987F75CC4C83F40FC1CDAAF1E28CE2B58181FDF23C6
-        E357714DBB14EA18C5896A7FC8A3DBD11F93F2C4C42411C5636DD376A2569BCF
-        04DC807B06D04BDB025807E0F234306FA917840000000049454E44AE426082}
-      ExplicitLeft = 178
-      ExplicitTop = 216
-      ExplicitWidth = 51
-    end
-    object ButtonFlatCloseHint2: TButtonFlat
-      Left = 0
-      Top = 223
-      Width = 411
-      Height = 49
-      Align = alBottom
-      Caption = #1047#1072#1082#1088#1099#1090#1100
-      ColorNormal = clGray
-      ColorOver = 9671571
-      ColorPressed = 7566195
+    object Label2: TLabel
+      Left = 50
+      Top = 111
+      Width = 341
+      Height = 33
+      AutoSize = False
+      Caption = 
+        #1055#1088#1086#1075#1088#1072#1084#1084#1072' '#1073#1091#1076#1077#1090' '#1079#1072#1087#1091#1089#1082#1072#1090#1100#1089#1103' '#1082#1072#1078#1076#1099#1081' '#1088#1072#1079' '#1087#1088#1080' '#1074#1093#1086#1076#1077' '#1090#1077#1082#1091#1097#1077#1075#1086' '#1087#1086#1083#1100#1079#1086 +
+        #1074#1072#1090#1077#1083#1103' '#1074' '#1089#1080#1089#1090#1077#1084#1091
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
+      Font.Color = 5789784
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
+    object Label3: TLabel
+      Left = 50
+      Top = 172
+      Width = 341
+      Height = 33
+      AutoSize = False
+      Caption = 
+        #1055#1088#1086#1075#1088#1072#1084#1084#1072' '#1073#1091#1076#1077#1090' '#1079#1072#1087#1091#1089#1082#1072#1090#1100#1089#1103' '#1082#1072#1078#1076#1099#1081' '#1088#1072#1079' '#1087#1088#1080' '#1074#1093#1086#1076#1077' '#1083#1102#1073#1086#1075#1086' '#1087#1086#1083#1100#1079#1086#1074#1072 +
+        #1090#1077#1083#1103' '#1074' '#1089#1080#1089#1090#1077#1084#1091
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5789784
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
+    end
+    object CheckBoxCurrentUser: TCheckBoxFlat
+      Left = 20
+      Top = 84
+      Width = 371
+      Height = 30
+      Caption = #1047#1072#1087#1091#1089#1082#1072#1090#1100' '#1090#1086#1083#1100#1082#1086' '#1076#1083#1103' '#1090#1077#1082#1091#1097#1077#1075#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103
+      ColorNormal = 15132390
+      ColorOver = 15461355
+      ColorPressed = 15000804
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
       FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWhite
-      FontOver.Height = -15
-      FontOver.Name = 'Segoe UI'
-      FontOver.Style = [fsBold]
+      FontOver.Color = clWindowText
+      FontOver.Height = -13
+      FontOver.Name = 'Tahoma'
+      FontOver.Style = []
       FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWhite
-      FontDown.Height = -15
-      FontDown.Name = 'Segoe UI'
-      FontDown.Style = [fsBold]
+      FontDown.Color = clWindowText
+      FontDown.Height = -13
+      FontDown.Name = 'Tahoma'
+      FontDown.Style = []
       IgnorBounds = True
-      OnClick = ButtonFlatCloseHint2Click
+      ImageIndentRight = 3
+      ImageIndex = 1
+      Images = ImageList24
+      OnClick = CheckBoxCurrentUserClick
       RoundRectParam = 0
       ShowFocusRect = False
       TabOrder = 0
       TabStop = True
-      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      TextFormat = [tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clWhite
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = -6
+      Checked = True
+      ImageCheck = 1
+      ImageUncheck = 0
+    end
+    object CheckBoxLocalMachine: TCheckBoxFlat
+      Left = 20
+      Top = 143
+      Width = 371
+      Height = 30
+      Caption = #1047#1072#1087#1091#1089#1082#1072#1090#1100' '#1076#1083#1103' '#1074#1089#1077#1093' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077#1081' ('#1090#1088#1077#1073#1091#1102#1090#1089#1103' '#1087#1088#1072#1074#1072')'
+      ColorNormal = 15132390
+      ColorOver = 15461355
+      ColorPressed = 15000804
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -13
+      FontOver.Name = 'Tahoma'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -13
+      FontDown.Name = 'Tahoma'
+      FontDown.Style = []
+      IgnorBounds = True
+      ImageIndentRight = 3
+      ImageIndex = 0
+      Images = ImageList24
+      OnClick = CheckBoxLocalMachineClick
+      RoundRectParam = 0
+      ShowFocusRect = False
+      TabOrder = 1
+      TabStop = True
+      TextFormat = [tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ImageCheck = 1
+      ImageUncheck = 0
+    end
+    object Panel1: TPanel
+      Left = 0
+      Top = 225
+      Width = 411
+      Height = 49
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 2
+      object ButtonFlatAdd: TButtonFlat
+        Left = 0
+        Top = 0
+        Width = 362
+        Height = 49
+        Align = alClient
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1072#1074#1090#1086#1079#1072#1087#1091#1089#1082
+        ColorNormal = 15244288
+        ColorOver = 16756230
+        ColorPressed = 14521600
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        FontOver.Charset = DEFAULT_CHARSET
+        FontOver.Color = clWhite
+        FontOver.Height = -15
+        FontOver.Name = 'Segoe UI'
+        FontOver.Style = [fsBold]
+        FontDown.Charset = DEFAULT_CHARSET
+        FontDown.Color = clWhite
+        FontDown.Height = -15
+        FontDown.Name = 'Segoe UI'
+        FontDown.Style = [fsBold]
+        IgnorBounds = True
+        ImageIndentLeft = 49
+        OnClick = ButtonFlatAddClick
+        RoundRectParam = 0
+        ShowFocusRect = False
+        TabOrder = 0
+        TabStop = True
+        TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+        SubTextFont.Charset = DEFAULT_CHARSET
+        SubTextFont.Color = clWhite
+        SubTextFont.Height = -13
+        SubTextFont.Name = 'Tahoma'
+        SubTextFont.Style = []
+      end
+      object ButtonFlatCloseFile: TButtonFlat
+        Left = 362
+        Top = 0
+        Width = 49
+        Height = 49
+        Hint = #1047#1072#1082#1088#1099#1090#1100
+        Align = alRight
+        Caption = ''
+        ColorNormal = 15244288
+        ColorOver = 16756230
+        ColorPressed = 14521600
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        FontOver.Charset = DEFAULT_CHARSET
+        FontOver.Color = clWhite
+        FontOver.Height = -15
+        FontOver.Name = 'Segoe UI'
+        FontOver.Style = [fsBold]
+        FontDown.Charset = DEFAULT_CHARSET
+        FontDown.Color = clWhite
+        FontDown.Height = -15
+        FontDown.Name = 'Segoe UI'
+        FontDown.Style = [fsBold]
+        IgnorBounds = True
+        ImageIndentLeft = 12
+        ImageIndex = 2
+        Images = ImageList24
+        OnClick = ButtonFlatCloseFileClick
+        RoundRectParam = 0
+        ShowFocusRect = False
+        TabOrder = 1
+        TabStop = True
+        TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+        SubTextFont.Charset = DEFAULT_CHARSET
+        SubTextFont.Color = clWhite
+        SubTextFont.Height = -13
+        SubTextFont.Name = 'Tahoma'
+        SubTextFont.Style = []
+      end
     end
   end
   object PanelStart: TPanel
     Left = 0
     Top = 0
     Width = 411
-    Height = 272
+    Height = 274
     Align = alClient
     BevelOuter = bvNone
     Color = 15132390
@@ -346,7 +294,7 @@ object FormMain: TFormMain
       Left = 20
       Top = 85
       Width = 371
-      Height = 118
+      Height = 120
       Margins.Left = 20
       Margins.Top = 0
       Margins.Right = 20
@@ -402,20 +350,17 @@ object FormMain: TFormMain
       AlignWithMargins = True
       Left = 3
       Top = 10
-      Width = 405
+      Width = 144
       Height = 19
       Margins.Top = 10
       Margins.Bottom = 10
       Align = alTop
       Alignment = taCenter
       Caption = #1044#1086#1073#1088#1086' '#1087#1086#1078#1072#1083#1086#1074#1072#1090#1100'!'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 144
     end
     object Panel2: TPanel
       Left = 0
-      Top = 223
+      Top = 225
       Width = 411
       Height = 49
       Align = alBottom
@@ -508,7 +453,7 @@ object FormMain: TFormMain
     Left = 0
     Top = 0
     Width = 411
-    Height = 272
+    Height = 274
     Align = alClient
     BevelOuter = bvNone
     Color = 15132390
@@ -520,7 +465,7 @@ object FormMain: TFormMain
       Left = 20
       Top = 138
       Width = 371
-      Height = 75
+      Height = 77
       Margins.Left = 20
       Margins.Top = 10
       Margins.Right = 20
@@ -767,7 +712,121 @@ object FormMain: TFormMain
     end
     object ButtonFlat1: TButtonFlat
       Left = 0
-      Top = 223
+      Top = 225
+      Width = 411
+      Height = 49
+      Align = alBottom
+      Caption = #1047#1072#1082#1088#1099#1090#1100
+      ColorNormal = clGray
+      ColorOver = 9671571
+      ColorPressed = 7566195
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWhite
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = [fsBold]
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWhite
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = [fsBold]
+      IgnorBounds = True
+      OnClick = ButtonFlat1Click
+      RoundRectParam = 0
+      ShowFocusRect = False
+      TabOrder = 0
+      TabStop = True
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+    end
+  end
+  object PanelHintNoSupport: TPanel
+    Left = 0
+    Top = 0
+    Width = 411
+    Height = 274
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 15132390
+    ParentBackground = False
+    TabOrder = 3
+    Visible = False
+    object LabelInfo: TLabel
+      AlignWithMargins = True
+      Left = 20
+      Top = 66
+      Width = 371
+      Height = 109
+      Margins.Left = 20
+      Margins.Top = 20
+      Margins.Right = 20
+      Margins.Bottom = 50
+      Align = alClient
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 
+        #1042#1099#1073#1088#1072#1085#1085#1099#1081' '#1074#1072#1084#1080' '#1092#1072#1081#1083' '#1085#1077' '#1103#1074#1083#1103#1077#1090#1089#1103' '#1080#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1084' '#1080' '#1085#1077' '#1084#1086#1078#1077#1090' '#1073#1099#1090#1100' '#1076 +
+        #1086#1073#1072#1074#1083#1077#1085' '#1074' '#1040#1074#1090#1086#1079#1072#1075#1088#1091#1079#1082#1091'. '#1042#1086#1079#1084#1086#1078#1085#1086', '#1101#1090#1086' '#1089#1089#1099#1083#1082#1072'-'#1087#1088#1086#1090#1086#1082#1086#1083', '#1082#1086#1090#1086#1088#1072#1103' '#1080 +
+        #1089#1087#1086#1083#1100#1079#1091#1077#1090#1089#1103' '#1089#1090#1086#1088#1086#1085#1085#1080#1084#1080' '#1087#1088#1086#1075#1088#1072#1084#1084#1072#1084#1080'.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+      WordWrap = True
+      ExplicitTop = 20
+      ExplicitWidth = 304
+      ExplicitHeight = 126
+    end
+    object Image2: TImage
+      Left = 0
+      Top = 0
+      Width = 411
+      Height = 46
+      Align = alTop
+      Center = True
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+        00200806000000737A7AF4000000097048597300000EC400000EC401952B0E1B
+        000002874944415478DAED974D68134114C76736BB25B13D582C827AD2A36DA8
+        90BABB58F564A00441C986828262C143BD280A063C483D78500B7A537AF0A0A8
+        947CF4A0A878F2BA1F41726811B127454148442A1E02D99DFE37282D613F66F3
+        810A7DB0EC6466F8BFDF7B799937A1E42F1BDD02F8AF001652A96D3B24E93261
+        EC20A5F4C4E635C6D82F88DDB56DBB325DA93CEF29C0D36472389E48DC218270
+        9E4B95B1CF10CE670D63B16B80254539CC2875231A8E92ADDF202FBFD4EBDAC5
+        D5D546470025593E4905A188A118D9F9064465ADD148CF54AB3F220120F23422
+        7FD595F33F0C84585F6BB5235E99F004687DE78383CB18EEEED6F94622D8AD9C
+        615CE30228CBF27D14DC8510CD4682B19D19C358C3FE3CF6DF0ED9DF64B67D20
+        67592B8100CF52A991014972AB38DE6300370D8B9A619C0A0428AB6A1EAF70B1
+        4E0008F9491D676FD634EBBE00254529E190D1FA044098E34CE54CF38D27C00D
+        4284A4A27C2494EEEB17001C5EC9EAFA3D4F80C2E8E8406C68E81B00B6F72D03
+        6DBF867F0BE02D0E9DEF8AF20900BB38B49A509BC7D3C0FE493C691E00D8754D
+        D76F7A02B89F5184CB28C2FD9C62910D1938830C3CF1032025557D80C9D93E39
+        77044AC75084EF7D018AB27C5C1084171C7A9DD4C03B5BD7E569426C5F800221
+        B198AA56311CEB3980E3CC6AA6B9B079CAB3172C210B2C3C0BD18A90B19544BD
+        9ECAB47544DF765C569447103DCB91561E6B12DB3EA45996D5BEE00BE0DEFF46
+        44F135208E76E3B955788CCDE0FC7FECB51E78236A41485219C3A94E2347F339
+        0DE745BF0D3C97528A0E3987F75CC4C83F40FC1CDAAF1E28CE2B58181FDF23C6
+        E357714DBB14EA18C5896A7FC8A3DBD11F93F2C4C42411C5636DD376A2569BCF
+        04DC807B06D04BDB025807E0F234306FA917840000000049454E44AE426082}
+      ExplicitLeft = 178
+      ExplicitTop = 216
+      ExplicitWidth = 51
+    end
+    object ButtonFlatCloseHint2: TButtonFlat
+      Left = 0
+      Top = 225
       Width = 411
       Height = 49
       Align = alBottom
@@ -804,267 +863,305 @@ object FormMain: TFormMain
       SubTextFont.Style = []
     end
   end
-  object PanelClient: TPanel
+  object PanelSuccess: TPanel
     Left = 0
     Top = 0
     Width = 411
-    Height = 272
+    Height = 274
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 4309873
+    ParentBackground = False
+    TabOrder = 6
+    Visible = False
+    object LabelSuccess: TLabel
+      AlignWithMargins = True
+      Left = 20
+      Top = 79
+      Width = 371
+      Height = 96
+      Margins.Left = 20
+      Margins.Top = 20
+      Margins.Right = 20
+      Margins.Bottom = 50
+      Align = alClient
+      Alignment = taCenter
+      AutoSize = False
+      Caption = #1059#1089#1087#1077#1096#1085#1086
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      WordWrap = True
+      ExplicitTop = 20
+      ExplicitWidth = 304
+      ExplicitHeight = 126
+    end
+    object Image4: TImage
+      Left = 0
+      Top = 0
+      Width = 411
+      Height = 59
+      Align = alTop
+      Center = True
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000300000
+        003008060000005702F987000000097048597300000EC400000EC401952B0E1B
+        0000026F4944415478DAED98CF4BDB601C879BFE9CA33011BBC1C043FF16D959
+        F0B6ED30AFFEAA971D3C4C107B700A8AB8DBAEDB79BBEC8F98077530F5BCD1AE
+        C2362854A8B56D529F5712C8424DD2E45DDE14F28597376908DFCFF3BE4FD31F
+        5A6ACC4B531D2001501D2001501D2001501D2001501DC0AB0683C123A68EA669
+        376307D06C36278BC5E2926118D942A1B0357600BD5E6F83F08B1C4EA6D3E96A
+        2E97DB1E0B0073E55709BF8E42132227D5617ED76AB5AAA552E92AB60066F815
+        5DD797397D62CB680071C6FC1C9D2E620B20B421FC12611FB3FA69DBA55FD96C
+        76B356AB7D2C97CB9DD8010CD3C6BC64302E095F617C72DE170B00376D183F79
+        F3BECD6432EF87DD1B0B00376D08BFC513E803D7AE630710549B580084D12616
+        0061B4510A20431B6500B2B45106204B1BDF0034794AD32AF33E1FDFE74183CB
+        D6C6178008DFEFF70F683AC7E9775666399FCF1F050C2F551B5F00ACFC17C23F
+        0324CFA9CEF69E72BC30EA4EB86853277C3588369E0034ACD07897C382EDE501
+        CD7E1362D60F8487360D94590BAA8D27000D1F027048F3179C4EFC7383A61D33
+        56D0E9AB47F8FBBE12FF20F84E186D3C0144B5DBED199A6C02F3D2B1133A21BE
+        01F08A79E84E58DA38C28B92A28D2F0051E20775B7DB7DC3BC9A1AA2136166ED
+        105169E31BC0826045F7BC748A529B910044B9E9643D9D98E7A3D2666400516E
+        3A11ACC1EB531C3F4839B4E18955E1FA67D9C14706B020EED3C95177DA3076D0
+        4BBA36810144B9E864AFBAF93FCE7FD126148028179D22D126348005E1D02932
+        6DA4008872E8F4272A6DA40188123BC1B7D6D7843EE1591F893652014C886900
+        FE461D5E1A80CA4A00545702A0BA1200D5750BC36ED5405CB75D0E0000000049
+        454E44AE426082}
+      ExplicitTop = 10
+    end
+    object ButtonFlatOk: TButtonFlat
+      Left = 0
+      Top = 225
+      Width = 411
+      Height = 49
+      Align = alBottom
+      Caption = #1054#1050
+      ColorNormal = 3317851
+      ColorOver = 3052628
+      ColorPressed = 2588232
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWhite
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWhite
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonFlatOkClick
+      RoundRectParam = 0
+      ShowFocusRect = False
+      TabOrder = 0
+      TabStop = True
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+    end
+  end
+  object PanelAutorun: TPanel
+    Left = 0
+    Top = 0
+    Width = 411
+    Height = 274
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 15132390
+    ParentBackground = False
+    TabOrder = 4
+    Visible = False
+    object ButtonFlatCloseAutoruns: TButtonFlat
+      Left = 0
+      Top = 225
+      Width = 411
+      Height = 49
+      Align = alBottom
+      Caption = #1047#1072#1082#1088#1099#1090#1100
+      ColorNormal = clGray
+      ColorOver = 9671571
+      ColorPressed = 7566195
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWhite
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = [fsBold]
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWhite
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = [fsBold]
+      IgnorBounds = True
+      OnClick = ButtonFlatCloseAutorunsClick
+      RoundRectParam = 0
+      ShowFocusRect = False
+      TabOrder = 0
+      TabStop = True
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+    end
+    object TableExAutoruns: TTableEx
+      Left = 0
+      Top = 0
+      Width = 411
+      Height = 225
+      Align = alClient
+      BorderStyle = bsNone
+      DefaultRowHeight = 45
+      TabOrder = 1
+      OnDrawCellData = TableExAutorunsDrawCellData
+      ItemIndex = -1
+      OnItemColClick = TableExAutorunsItemColClick
+      Columns = <
+        item
+          Width = 360
+          MinWidth = 360
+        end
+        item
+          Width = 51
+          MinWidth = 30
+          AsButton = True
+        end>
+      DefaultDataDrawing = False
+      ItemCount = 1
+      LineColorXor = 15593455
+      LineHotColor = 16316664
+      LineSelColor = 14803939
+      FontHotLine.Charset = DEFAULT_CHARSET
+      FontHotLine.Color = 2631720
+      FontHotLine.Height = -16
+      FontHotLine.Name = 'Tahoma'
+      FontHotLine.Style = []
+      FontLine.Charset = DEFAULT_CHARSET
+      FontLine.Color = 2631720
+      FontLine.Height = -16
+      FontLine.Name = 'Tahoma'
+      FontLine.Style = []
+      FontSelLine.Charset = DEFAULT_CHARSET
+      FontSelLine.Color = clWhite
+      FontSelLine.Height = -16
+      FontSelLine.Name = 'Tahoma'
+      FontSelLine.Style = []
+      ShowColumns = False
+      ColumnsFont.Charset = DEFAULT_CHARSET
+      ColumnsFont.Color = 2631720
+      ColumnsFont.Height = -11
+      ColumnsFont.Name = 'Tahoma'
+      ColumnsFont.Style = []
+      CanClickToUnfocused = True
+    end
+  end
+  object PanelDrag: TPanel
+    Left = 0
+    Top = 0
+    Width = 411
+    Height = 274
     Margins.Left = 15
     Margins.Top = 15
     Margins.Right = 15
     Margins.Bottom = 15
     Align = alClient
     BevelOuter = bvNone
+    Caption = 'DragFiles'
     Color = 15132390
     ParentBackground = False
-    TabOrder = 1
-    object ImageIcon: TImage
-      Left = 13
-      Top = 13
-      Width = 48
-      Height = 48
+    TabOrder = 0
+    Visible = False
+    DesignSize = (
+      411
+      274)
+    object LabelExDrag: TLabelEx
+      AlignWithMargins = True
+      Left = 20
+      Top = 20
+      Width = 371
+      Height = 234
+      Margins.Left = 20
+      Margins.Top = 20
+      Margins.Right = 20
+      Margins.Bottom = 20
+      Align = alClient
+      Brush.Color = 15132390
+      Pen.Color = 9079434
+      Pen.Mode = pmMergePenNot
+      Pen.Style = psDash
+      Pen.Width = 3
+      Caption = ''
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4802889
+      Font.Height = -20
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter, tfWordBreak, tfWordEllipsis]
+      IgnorBounds = True
+      EllipseRectVertical = False
+      ExplicitLeft = 84
+      ExplicitTop = 15
+    end
+    object ImageDrop: TImage
+      Left = 116
+      Top = 71
+      Width = 169
+      Height = 122
+      Margins.Left = 50
+      Margins.Top = 50
+      Margins.Right = 50
+      Margins.Bottom = 50
+      Anchors = []
       Center = True
-    end
-    object LabelName: TLabel
-      Left = 67
-      Top = 15
-      Width = 330
-      Height = 24
-      AutoSize = False
-      Caption = 'LabelName'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 3355443
-      Font.Height = -19
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object LabelFullName: TLabel
-      Left = 67
-      Top = 41
-      Width = 330
-      Height = 18
-      AutoSize = False
-      Caption = 'LabelFullName'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5789784
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 50
-      Top = 111
-      Width = 341
-      Height = 33
-      AutoSize = False
-      Caption = 
-        #1055#1088#1086#1075#1088#1072#1084#1084#1072' '#1073#1091#1076#1077#1090' '#1079#1072#1087#1091#1089#1082#1072#1090#1100#1089#1103' '#1082#1072#1078#1076#1099#1081' '#1088#1072#1079' '#1087#1088#1080' '#1074#1093#1086#1076#1077' '#1090#1077#1082#1091#1097#1077#1075#1086' '#1087#1086#1083#1100#1079#1086 +
-        #1074#1072#1090#1077#1083#1103' '#1074' '#1089#1080#1089#1090#1077#1084#1091
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5789784
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      WordWrap = True
-    end
-    object Label3: TLabel
-      Left = 50
-      Top = 172
-      Width = 341
-      Height = 33
-      AutoSize = False
-      Caption = 
-        #1055#1088#1086#1075#1088#1072#1084#1084#1072' '#1073#1091#1076#1077#1090' '#1079#1072#1087#1091#1089#1082#1072#1090#1100#1089#1103' '#1082#1072#1078#1076#1099#1081' '#1088#1072#1079' '#1087#1088#1080' '#1074#1093#1086#1076#1077' '#1083#1102#1073#1086#1075#1086' '#1087#1086#1083#1100#1079#1086#1074#1072 +
-        #1090#1077#1083#1103' '#1074' '#1089#1080#1089#1090#1077#1084#1091
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5789784
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      WordWrap = True
-    end
-    object CheckBoxCurrentUser: TCheckBoxFlat
-      Left = 20
-      Top = 84
-      Width = 371
-      Height = 30
-      Caption = #1047#1072#1087#1091#1089#1082#1072#1090#1100' '#1090#1086#1083#1100#1082#1086' '#1076#1083#1103' '#1090#1077#1082#1091#1097#1077#1075#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103
-      ColorNormal = 15132390
-      ColorOver = 15461355
-      ColorPressed = 15000804
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWindowText
-      FontOver.Height = -13
-      FontOver.Name = 'Tahoma'
-      FontOver.Style = []
-      FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWindowText
-      FontDown.Height = -13
-      FontDown.Name = 'Tahoma'
-      FontDown.Style = []
-      IgnorBounds = True
-      ImageIndentRight = 3
-      ImageIndex = 1
-      Images = ImageList24
-      OnClick = CheckBoxCurrentUserClick
-      RoundRectParam = 0
-      ShowFocusRect = False
-      TabOrder = 0
-      TabStop = True
-      TextFormat = [tfSingleLine, tfVerticalCenter]
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clWhite
-      SubTextFont.Height = -13
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      Checked = True
-      ImageCheck = 1
-      ImageUncheck = 0
-    end
-    object CheckBoxLocalMachine: TCheckBoxFlat
-      Left = 20
-      Top = 143
-      Width = 371
-      Height = 30
-      Caption = #1047#1072#1087#1091#1089#1082#1072#1090#1100' '#1076#1083#1103' '#1074#1089#1077#1093' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077#1081' ('#1090#1088#1077#1073#1091#1102#1090#1089#1103' '#1087#1088#1072#1074#1072')'
-      ColorNormal = 15132390
-      ColorOver = 15461355
-      ColorPressed = 15000804
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWindowText
-      FontOver.Height = -13
-      FontOver.Name = 'Tahoma'
-      FontOver.Style = []
-      FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWindowText
-      FontDown.Height = -13
-      FontDown.Name = 'Tahoma'
-      FontDown.Style = []
-      IgnorBounds = True
-      ImageIndentRight = 3
-      ImageIndex = 0
-      Images = ImageList24
-      OnClick = CheckBoxLocalMachineClick
-      RoundRectParam = 0
-      ShowFocusRect = False
-      TabOrder = 1
-      TabStop = True
-      TextFormat = [tfSingleLine, tfVerticalCenter]
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clWhite
-      SubTextFont.Height = -13
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      ImageCheck = 1
-      ImageUncheck = 0
-    end
-    object Panel1: TPanel
-      Left = 0
-      Top = 223
-      Width = 411
-      Height = 49
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 2
-      ExplicitTop = 231
-      object ButtonFlatAdd: TButtonFlat
-        Left = 0
-        Top = 0
-        Width = 362
-        Height = 49
-        Align = alClient
-        Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1072#1074#1090#1086#1079#1072#1087#1091#1089#1082
-        ColorNormal = 15244288
-        ColorOver = 16756230
-        ColorPressed = 14521600
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        FontOver.Charset = DEFAULT_CHARSET
-        FontOver.Color = clWhite
-        FontOver.Height = -15
-        FontOver.Name = 'Segoe UI'
-        FontOver.Style = [fsBold]
-        FontDown.Charset = DEFAULT_CHARSET
-        FontDown.Color = clWhite
-        FontDown.Height = -15
-        FontDown.Name = 'Segoe UI'
-        FontDown.Style = [fsBold]
-        IgnorBounds = True
-        ImageIndentLeft = 49
-        OnClick = ButtonFlatAddClick
-        RoundRectParam = 0
-        ShowFocusRect = False
-        TabOrder = 0
-        TabStop = True
-        TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
-        SubTextFont.Charset = DEFAULT_CHARSET
-        SubTextFont.Color = clWhite
-        SubTextFont.Height = -13
-        SubTextFont.Name = 'Tahoma'
-        SubTextFont.Style = []
-        ExplicitLeft = -6
-        ExplicitTop = 3
-      end
-      object ButtonFlatCloseFile: TButtonFlat
-        Left = 362
-        Top = 0
-        Width = 49
-        Height = 49
-        Hint = #1047#1072#1082#1088#1099#1090#1100
-        Align = alRight
-        Caption = ''
-        ColorNormal = 15244288
-        ColorOver = 16756230
-        ColorPressed = 14521600
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        FontOver.Charset = DEFAULT_CHARSET
-        FontOver.Color = clWhite
-        FontOver.Height = -15
-        FontOver.Name = 'Segoe UI'
-        FontOver.Style = [fsBold]
-        FontDown.Charset = DEFAULT_CHARSET
-        FontDown.Color = clWhite
-        FontDown.Height = -15
-        FontDown.Name = 'Segoe UI'
-        FontDown.Style = [fsBold]
-        IgnorBounds = True
-        ImageIndentLeft = 12
-        ImageIndex = 2
-        Images = ImageList24
-        OnClick = ButtonFlatCloseFileClick
-        RoundRectParam = 0
-        ShowFocusRect = False
-        TabOrder = 1
-        TabStop = True
-        TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
-        SubTextFont.Charset = DEFAULT_CHARSET
-        SubTextFont.Color = clWhite
-        SubTextFont.Height = -13
-        SubTextFont.Name = 'Tahoma'
-        SubTextFont.Style = []
-        ExplicitLeft = 361
-      end
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000800000
+        00800806000000C33E61CB000000097048597300000EC400000EC401952B0E1B
+        0000037C4944415478DAEDDCBD6E535B1445611C454272431A5E828212DECA55
+        245B883AA48BE44740F4D0F23E94D4965C44C65E28124489E39F35F73CFBACF1
+        35DCCA9EDB6B08BA3B7985D226EE01F02280E208A03802288E008A2380E208A0
+        3802288E008A2380E208A03802288E008A2380E208A03802288E008A2380E208
+        A03802288E008A2380E2BA09E0E6E6E6DDC5C5C57BF78E634CA7D3EFB3D96CED
+        DEB14F3701DCDEDE2EB67F7C71EF38C6E5E5E5DBEBEBEBDFEE1DFB1080100124
+        22000D021022804404A041004204908800340840880012118006010811402202
+        D0200021024844001A042044008908408300840820110168108010012422000D
+        021022804404A041004204908800340840880012118006010811402202D02000
+        21024844001A042044008908408300840820110168108010012422000D021022
+        804404A0410042049088003408408800121180466A00CBE5F2F56AB5FABAD96C
+        3EA60F9D4CDE6CFFB86AF6CBE4F8B5FD2DEE05BFC5E7C562F12DE5B3B2C7DDDD
+        DD5DADD7EB9FDBFFFC90FDD988E37F9ACFE7697F134AFE0920028DECE3C767AA
+        C612412EC5F1E37395A3892087EAF8F1D9EAF144701EE5F1E3F35B3C82084EA3
+        3E7E7C47ABC710C1715A1C3FBEA7E5A388E030AD8E1FDFD5FA7144B05FCBE3C7
+        F7391E49044F6B7DFCF84ED76389E07F8EE3C7F73A1F4D047FB98E1FDFED7E7C
+        F5089CC78FEF77FF003B5523701F3F36B87F8407D52218C2F163877BC0BFAA44
+        3094E3C716F780C7C61EC1908E1F7BDC039E32D6088676FCD8E41EF09CB14530
+        C4E3C72EF7807DC612C1508F1FDBDC035ED27B04433E7EEC730F3844AF110CFD
+        F8B1D13DE050BD45D0C3F163A77BC0317A89A097E3C756F780630D3D829E8E1F
+        7BDD034E31D4087A3B7E6C760F38D5D022E8F1F8B1DB3DE01C4389A0D7E3C776
+        F78073B923E8F9F8B1DF3D20832B82DE8F1F6F700FC8D23A82311C3FDEE11E90
+        A9550463397EBCC53D209B3A82311D3FDEE31EA0A08A606CC78F37B907A86447
+        30C6E3C7BBDC0394B22218EBF1E36DEE016AE74630E6E3C7FBDC035A383582B1
+        1F3FDEE81ED0CAB11154387EBCD33DA0A54323A872FC78AB7B406B2F4550E9F8
+        F15EF70087E722A876FC78B37B80CBE3082A1E3FDEED1EE0F410C1F6F83F2A1E
+        7FA774003BBBFFC1F56C365BBB77B8940FA03A02288E008A2380E208A0380228
+        8E008A2380E208A03802288E008A2380E208A03802288E008A2380E208A0B83F
+        F1EB469F535ED0D90000000049454E44AE426082}
     end
   end
   object ImageList24: TImageList
@@ -1074,7 +1171,7 @@ object FormMain: TFormMain
     Left = 344
     Top = 32
     Bitmap = {
-      494C010105000800380018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800480018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1674,5 +1771,12 @@ object FormMain: TFormMain
       FE007FFE007FF3FFCFF0000FFFC3FFFFC3FFFFFFFFFF80FFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object TimerAnimate: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = TimerAnimateTimer
+    Left = 280
+    Top = 104
   end
 end
