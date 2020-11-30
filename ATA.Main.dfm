@@ -350,13 +350,14 @@ object FormMain: TFormMain
       AlignWithMargins = True
       Left = 3
       Top = 10
-      Width = 144
+      Width = 405
       Height = 19
       Margins.Top = 10
       Margins.Bottom = 10
       Align = alTop
       Alignment = taCenter
       Caption = #1044#1086#1073#1088#1086' '#1087#1086#1078#1072#1083#1086#1074#1072#1090#1100'!'
+      ExplicitWidth = 144
     end
     object Panel2: TPanel
       Left = 0
@@ -1030,6 +1031,7 @@ object FormMain: TFormMain
       BorderStyle = bsNone
       DefaultRowHeight = 45
       TabOrder = 1
+      StyleElements = [seBorder]
       OnDrawCellData = TableExAutorunsDrawCellData
       ItemIndex = -1
       OnItemColClick = TableExAutorunsItemColClick
@@ -1171,7 +1173,7 @@ object FormMain: TFormMain
     Left = 344
     Top = 32
     Bitmap = {
-      494C010105000800480018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800040018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -2,8 +2,7 @@ program AddAutorun;
 
 uses
   Vcl.Forms,
-  ATA.Main in 'ATA.Main.pas' {FormMain},
-  HGM.Common.Helper in '..\..\Components\HGM.Common.Helper.pas';
+  ATA.Main in 'ATA.Main.pas' {FormMain};
 
 {$R *.res}
 

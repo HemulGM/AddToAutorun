@@ -5,19 +5,19 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Winapi.ActiveX, Winapi.ShellAPI, HGM.Controls.VirtualTable, Vcl.Grids,
-  Vcl.ExtCtrls, HGM.Controls.Labels, Vcl.Imaging.pngimage, Vcl.StdCtrls,
-  HGM.Button, System.ImageList, Vcl.ImgList, System.Win.Registry,
+  Winapi.ActiveX, HGM.Controls.VirtualTable, Vcl.Grids, Vcl.ExtCtrls,
+  HGM.Controls.Labels, Vcl.Imaging.pngimage, Vcl.StdCtrls, HGM.Button,
+  System.ImageList, Vcl.ImgList, System.Win.Registry,
   System.Generics.Collections;
 
 type
-  TFile = record
+  TAutorunFileItem = record
     Name: string;
     FullName: string;
     RootKey: HKEY;
   end;
 
-  TAutoruns = TTableData<TFile>;
+  TAutoruns = TTableData<TAutorunFileItem>;
 
   TFormMain = class(TForm, IDropTarget)
     PanelDrag: TPanel;
@@ -74,11 +74,11 @@ type
     procedure ButtonFlat1Click(Sender: TObject);
     procedure TimerAnimateTimer(Sender: TObject);
   private
-    FFile: TFile;
+    FFile: TAutorunFileItem;
     FAutoruns: TAutoruns;
     FActionInfoBox: TProc;
     FAnimateDir: Boolean;
-    function CreateInputFile(FileName: string): TFile;
+    function CreateInputFile(FileName: string): TAutorunFileItem;
     procedure Clear;
     function ExistCurrentApp: Integer;
     procedure AddCurrentToAutoRun;
@@ -90,7 +90,9 @@ type
     procedure ProcessFile(FileName: string);
     // IDropTarget
     function DragEnter(const DataObj: IDataObject; grfKeyState: Longint; Pt: TPoint; var dwEffect: Longint): HResult; stdcall;
-    function DragOver(grfKeyState: Longint; Pt: TPoint; var dwEffect: Longint): HResult; stdcall;
+    {$WARNINGS OFF}
+    function DragOver(grfKeyState: Longint; pt: TPoint; var dwEffect: Longint): HResult; stdcall;
+    {$WARNINGS ON}
     function DragLeave: HResult; stdcall;
     function Drop(const DataObj: IDataObject; grfKeyState: Longint; Pt: TPoint; var dwEffect: Longint): HResult; stdcall;
     // IUnknown
@@ -99,7 +101,7 @@ type
   end;
 
 const
-  BinExtArray: array of string = ['.exe', '.bat', '.cmd'];
+  BinExtArray: array of string = ['.exe', '.bat', '.cmd', '.scr'];
 
 var
   FormMain: TFormMain;
@@ -107,7 +109,7 @@ var
 implementation
 
 uses
-  HGM.Common.Utils, ComObj, Commctrl, ShlObj, HGM.Common.Helper;
+  Winapi.ShellAPI, HGM.Common.Utils, Winapi.CommCtrl, HGM.Common.Helper;
 
 {$R *.dfm}
 
@@ -280,7 +282,7 @@ begin
   PanelDrag.Hide;
 end;
 
-function TFormMain.CreateInputFile(FileName: string): TFile;
+function TFormMain.CreateInputFile(FileName: string): TAutorunFileItem;
 begin
   Result.Name := GetFileDescription(FileName, GetFileNameWoE(FileName));
   Result.FullName := FileName;
@@ -307,7 +309,6 @@ var
   end;
 
 begin
-  Result := -1;
   FN := AnsiLowerCase(FFile.FullName);
   Reg := TRegistry.Create(KEY_READ);
   List := TStringList.Create;
@@ -432,7 +433,7 @@ procedure TFormMain.ButtonFlatAutorunListClick(Sender: TObject);
 var
   Reg: TRegistry;
   List: TStringList;
-  Item: TFile;
+  Item: TAutorunFileItem;
 
   procedure AddItems;
   var
