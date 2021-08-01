@@ -101,7 +101,7 @@ type
   end;
 
 const
-  BinExtArray: array of string = ['.exe', '.bat', '.cmd', '.scr'];
+  BinExtArray: TArray<string> = ['.exe', '.bat', '.cmd', '.scr'];
 
 var
   FormMain: TFormMain;
@@ -109,7 +109,8 @@ var
 implementation
 
 uses
-  Winapi.ShellAPI, HGM.Common.Utils, Winapi.CommCtrl, HGM.Common.Helper;
+  Winapi.ShellAPI, HGM.Common.Utils, Winapi.CommCtrl, HGM.ArrayHelper,
+  HGM.WinAPI;
 
 {$R *.dfm}
 
@@ -221,12 +222,12 @@ begin
         DragQueryFile(Medium.hGlobal, i, PChar(FileName), FileNameLength + 1);
         //Только исполнительные файлы
 
-        if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+        if TArrayHelp.InArray<string>(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
           FileList.Add(FileName)
         else if AnsiLowerCase(ExtractFileExt(FileName)) = '.lnk' then
         begin
           FileName := GetFileNameFromLink(FileName);
-          if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+          if TArrayHelp.InArray<string>(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
             FileList.Add(FileName);
         end;
       end;
@@ -258,12 +259,12 @@ begin
     FileName := ParamStr(1);
     if FileExists(FileName) then
     begin
-      if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+      if TArrayHelp.InArray<string>(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
         ProcessFile(FileName)
       else if AnsiLowerCase(ExtractFileExt(FileName)) = '.lnk' then
       begin
         FileName := GetFileNameFromLink(FileName);
-        if ThArray.InArray(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
+        if TArrayHelp.InArray<string>(BinExtArray, AnsiLowerCase(ExtractFileExt(FileName))) then
           ProcessFile(FileName);
       end;
     end;
